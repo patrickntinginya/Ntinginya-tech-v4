@@ -79,6 +79,7 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: siteConfig.name,
+  alternateName: "Ntinginya",
   url: siteConfig.url,
   inLanguage: "en",
   potentialAction: {
