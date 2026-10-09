@@ -7,3 +7,42 @@ export const siteConfig = {
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://ntinginya-tech-v4.vercel.app").replace(/\/$/, ""),
   copyright: "© 2026 Ntinginya Tech. All rights reserved.",
 } as const;
+
+export const contactInfo = {
+  email: "ntinginyatech@gmail.com",
+  phone: "+255784949095",
+  location: "Tanzania",
+} as const;
+
+export const navItems = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Products", href: "/products" },
+  { label: "Agriculture", href: "/agriculture" },
+  { label: "Innovation", href: "/innovation" },
+  { label: "Masterclass", href: "/masterclass" },
+  { label: "R&D", href: "/r-and-d" },
+  { label: "News", href: "/news" },
+  { label: "Network", href: "/network" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+export const footerLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Products", href: "/products" },
+  { label: "News", href: "/news" },
+  { label: "Network", href: "/network" },
+  { label: "Contact", href: "/contact" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+] as const;
+
+export const socialLinks = [
+  { label: "LinkedIn", href: "" },
+  { label: "X", href: "" },
+  { label: "Instagram", href: "" },
+  { label: "Facebook", href: "" },
+  { label: "YouTube", href: "" },
+] as const;
