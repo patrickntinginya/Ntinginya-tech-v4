@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------
+   Design tokens. Edit here to change radius, shadow and motion globally.
+   Colours stay in tailwind.config.ts (deep, field, maize, mist, paper, sage).
+---------------------------------------------------------------- */
+:root {
+  --radius-card: 1rem;
+  --radius-control: 0.5rem;
+  --shadow-card: 0 1px 2px rgb(10 42 48 / 0.06), 0 4px 14px rgb(10 42 48 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(10 42 48 / 0.08), 0 12px 28px rgb(10 42 48 / 0.12);
+  --duration-base: 200ms;
+  --ease-brand: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-mist font-serif text-[1.0625rem] leading-[1.7] text-deep antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-sans;
+  }
+
+  ::selection {
+    @apply bg-maize-400 text-deep;
+  }
+
+  :focus-visible {
+    outline: 2px solid #2a7a4b;
+    outline-offset: 3px;
+  }
+
+  .surface-dark :focus-visible {
+    outline-color: #f5b700;
+  }
+}
+
+@layer components {
+  .skip-link {
+    @apply absolute left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-deep px-4 py-3 font-sans text-sm font-semibold text-white transition-transform focus:translate-y-0;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Hero visual: a single orchestrated load moment.
+   Contour lines draw in from the centre, then connections, then nodes.
+   Base state is fully visible; animation only plays "from" a hidden state.
+---------------------------------------------------------------- */
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes plot {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.contour,
+.edge {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.contour {
+  animation: draw 1.8s cubic-bezier(0.3, 0.6, 0.2, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+.edge {
+  animation: draw 0.9s ease-out backwards;
+  animation-delay: calc(800ms + var(--i, 0) * 110ms);
+}
+
+.plot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: plot 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) backwards;
+  animation-delay: calc(1100ms + var(--i, 0) * 110ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Article body (public) and the admin rich-text editor share this.
+---------------------------------------------------------------- */
+.article-prose {
+  @apply text-[1.0625rem] leading-[1.8] text-deep/90;
+  overflow-wrap: anywhere;
+}
+.article-prose > * + * {
+  @apply mt-5;
+}
+.article-prose h2 {
+  @apply mt-10 font-sans text-3xl font-semibold leading-tight tracking-tight text-deep;
+}
+.article-prose h3 {
+  @apply mt-8 font-sans text-2xl font-semibold leading-tight tracking-tight text-deep;
+}
+.article-prose h4 {
+  @apply mt-6 font-sans text-xl font-semibold text-deep;
+}
+.article-prose a {
+  @apply font-medium text-field-700 underline underline-offset-4 hover:text-field-800;
+}
+.article-prose ul {
+  @apply list-disc pl-6;
+}
+.article-prose ol {
+  @apply list-decimal pl-6;
+}
+.article-prose li + li {
+  @apply mt-1.5;
+}
+.article-prose blockquote {
+  @apply border-l-4 border-maize-400 bg-paper py-1 pl-5 italic text-deep/80;
+}
+.article-prose img {
+  @apply h-auto max-w-full rounded-xl;
+}
+.article-prose figure {
+  @apply my-8;
+}
+.article-prose figcaption {
+  @apply mt-2 text-center font-sans text-sm text-deep/70;
+}
+.article-prose pre {
+  @apply overflow-x-auto rounded-lg bg-deep p-4 font-mono text-sm text-white;
+}
+.article-prose code {
+  @apply rounded bg-deep/10 px-1 py-0.5 font-mono text-[0.9em];
+}
+.article-prose pre code {
+  @apply bg-transparent p-0;
+}
+.article-prose table {
+  @apply block w-full overflow-x-auto border-collapse font-sans text-[0.9375rem];
+}
+.article-prose th,
+.article-prose td {
+  @apply border border-deep/20 px-3 py-2 text-left align-top;
+}
+.article-prose th {
+  @apply bg-sage font-semibold;
+}
+.article-prose hr {
+  @apply my-8 border-deep/20;
+}
+
+.editor-surface:empty::before {
+  content: attr(data-placeholder);
+  @apply text-deep/45;
+}
+
+/* ---------------------------------------------------------------
+   Scroll reveal: CSS only, no JavaScript.
+   Content is fully visible by default. Browsers that support scroll-driven
+   animations fade the element in as it enters the viewport. Reduced-motion
+   users, and browsers without support, simply see the content.
+---------------------------------------------------------------- */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+/* Card hover lift, only for people who have not asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .lift {
+    transition:
+      transform var(--duration-base) var(--ease-brand),
+      box-shadow var(--duration-base) var(--ease-brand),
+      border-color var(--duration-base) var(--ease-brand);
+  }
+  .lift:hover {
+    transform: translateY(-2px);
+  }
+}
+.lift:hover {
+  box-shadow: var(--shadow-lift);
+}
+
+/* FAQ disclosure (native <details>, zero JavaScript). */
+details.faq > summary {
+  list-style: none;
+}
+details.faq > summary::-webkit-details-marker {
+  display: none;
+}
+details.faq[open] .faq-chevron {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,13 @@
+[build]
+  # Install first: some deploy paths (e.g. CLI builds) do not run an install step before the build.
+  command = "npm install --include=dev --no-audit --no-fund && npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Official Netlify Next.js runtime (OpenNext). Declared explicitly because automatic detection does
+# not run on every deploy path; without it the raw .next folder is uploaded as static files and
+# every route (pages, /admin, /login, /api) returns Netlify's 404.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
