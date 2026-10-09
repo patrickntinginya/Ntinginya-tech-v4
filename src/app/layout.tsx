@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   verification: {
-  google: "j-j6DDkmdm0ggGmpsVjjsYYXgo0iqbEdfBr8PWmGScY",
-},
+    google: "j-j6DDkmdm0ggGmpsVjjsYYXgo0iqbEdfBr8PWmGScY",
+  },
   applicationName: siteConfig.name,
   keywords: [
     "Ntinginya Tech",
@@ -78,7 +78,7 @@ const organizationJsonLd = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Ntinginya Tech",
+  name: siteConfig.name,
   alternateName: "Ntinginya",
   url: siteConfig.url,
   inLanguage: "en",
