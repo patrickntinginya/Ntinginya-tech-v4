@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   verification: {
-  google: "R9m1_tw0NNwcL0X4jWw3dvWOtcuvkFqAGmlzpxqSuHI",
+  google: "j-j6DDkmdm0ggGmpsVjjsYYXgo0iqbEdfBr8PWmGScY",
 },
   applicationName: siteConfig.name,
   keywords: [
