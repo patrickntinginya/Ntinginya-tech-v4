@@ -26,7 +26,8 @@ const nextConfig = {
   poweredByHeader: false,
   env: {
     // Canonical URLs, sitemap and Open Graph. Falls back to the URL Netlify provides at build time.
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || "",
+    // Only expose if it has a value; empty strings break the fallback logic in src/config/site.ts.
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || undefined,
   },
   async redirects() {
     return [
