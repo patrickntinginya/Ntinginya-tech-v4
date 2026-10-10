@@ -1,4 +1,4 @@
-const defaultSiteUrl =
+const defaultSiteUrl = "https://ntinginya-tech-v4.vercel.app"; 
   process.env.NEXT_PUBLIC_SITE_URL ??
   process.env.URL ??
   (process.env.VERCEL_URL
