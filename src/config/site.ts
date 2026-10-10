@@ -1,12 +1,4 @@
 const defaultSiteUrl = "https://ntinginya-tech-v4.vercel.app"; 
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  process.env.URL ??
-  (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`.includes("vercel.app")
-      ? `https://${process.env.VERCEL_URL}`
-      : "https://ntinginya-tech-v4.vercel.app" // Preview/staging: use production
-    : "https://ntinginya-tech-v4.vercel.app"); // Local dev: use production
-
 export const siteConfig = {
   name: "Ntinginya Tech",
   tagline: "Building Technology. Empowering People. Transforming Agriculture.",
