@@ -84,10 +84,16 @@ export async function savePostAction(_prev: FormState, form: FormData): Promise<
   let savedId = id;
   if (id) {
     const { error } = await sb.from("posts").update(row).eq("id", id);
-    if (error) return { error: error.code === DUPLICATE ? "Another post already uses that slug." : "The post could not be saved. Nothing was changed." };
+    if (error) {
+      console.error("[savePostAction UPDATE]", error.code, error.message);
+      return { error: error.code === DUPLICATE ? "Another post already uses that slug." : "The post could not be saved. Nothing was changed." };
+    }
   } else {
     const { data, error } = await sb.from("posts").insert({ ...row, author_id: staff.id }).select("id").single();
-    if (error || !data) return { error: error?.code === DUPLICATE ? "Another post already uses that slug." : "The post could not be saved. Nothing was changed." };
+    if (error || !data) {
+      console.error("[savePostAction INSERT]", error?.code, error?.message);
+      return { error: error?.code === DUPLICATE ? "Another post already uses that slug." : "The post could not be saved. Nothing was changed." };
+    }
     savedId = (data as { id: string }).id;
   }
 
@@ -388,10 +394,16 @@ export async function saveEntryAction(_prev: FormState, form: FormData): Promise
   let savedId = id;
   if (id) {
     const { error } = await sb.from("content_entries").update(value).eq("id", id);
-    if (error) return { error: error.code === DUPLICATE ? "Another item already uses that slug." : "It could not be saved. Nothing was changed." };
+    if (error) {
+      console.error("[saveEntryAction UPDATE]", { code: error.code, message: error.message, details: error.details });
+      return { error: error.code === DUPLICATE ? "Another item already uses that slug." : "The item could not be saved. Check that all required fields are filled and the slug is valid." };
+    }
   } else {
     const { data, error } = await sb.from("content_entries").insert({ ...value, created_by: staff.id }).select("id").single();
-    if (error || !data) return { error: error?.code === DUPLICATE ? "Another item already uses that slug." : "It could not be saved. Nothing was changed." };
+    if (error || !data) {
+      console.error("[saveEntryAction INSERT]", { code: error?.code, message: error?.message, details: error?.details });
+      return { error: error?.code === DUPLICATE ? "Another item already uses that slug." : "The item could not be saved. Check that all required fields are filled and the slug is valid." };
+    }
     savedId = (data as { id: string }).id;
   }
 
