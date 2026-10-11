@@ -40,20 +40,6 @@ export function AboutSection({ full = false }: { full?: boolean }) {
           </ul>
         </div>
       </div>
-
-      {full ? (
-        <div className="mt-16 rounded-2xl border border-deep/20 bg-paper p-6 sm:p-10 lg:max-w-3xl">
-          <h3 className="font-sans text-2xl font-semibold tracking-tight">Where we are today</h3>
-          <p className="mt-3 text-base leading-relaxed text-deep/80">
-            Ntinginya Tech is at an early stage. Our first product, Ntinginya Business Manager, is an MVP in
-            development. The agriculture, innovation, education and farmer network ideas on this site are future plans,
-            and we label them that way on purpose.
-          </p>
-          <p className="mt-3 text-base leading-relaxed text-deep/80">
-            We would rather show you an honest starting point than pretend to be further along.
-          </p>
-        </div>
-      ) : null}
     </Section>
   );
 }
