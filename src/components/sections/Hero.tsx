@@ -39,11 +39,6 @@ export function Hero() {
             </ButtonLink>
           </div>
 
-          <p className="mt-10 max-w-md border-l-2 border-maize-400 pl-4 text-[0.9375rem] leading-relaxed text-deep/80">
-            <span className="font-sans font-semibold text-deep">Where we are today:</span> we are building
-            Ntinginya Business Manager, currently an MVP. Everything else on this site is clearly marked as coming
-            soon or proposed.
-          </p>
         </div>
 
         <div className="mx-auto w-full max-w-[34rem] lg:max-w-none">

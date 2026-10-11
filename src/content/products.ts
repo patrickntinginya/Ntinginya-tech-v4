@@ -4,6 +4,7 @@ import {
   GraduationCap,
   Sprout,
   Users,
+  UserRound,
   type LucideIcon,
 } from "lucide-react";
 import type { StatusKey } from "./types";
@@ -35,7 +36,6 @@ export type Product = {
 
 /**
  * Only products in group "live" may be described as available.
- * Nothing is live yet, so the LIVE group renders an honest empty state.
  */
 export const products: Product[] = [
   {
@@ -54,6 +54,30 @@ export const products: Product[] = [
     statusNote:
       "This is an MVP in development. It is not yet publicly available, and its features may change as we test it with real businesses.",
     interestSubject: "Ntinginya Business Manager",
+  },
+  {
+    slug: "personal-life-os",
+    name: "Personal Life OS",
+    category: "Personal Productivity",
+    group: "live",
+    badges: ["live"],
+    icon: UserRound,
+    summary:
+      "Your personal life management platform for organizing daily activities, managing finances, tracking habits, setting reminders, learning, and improving productivity.",
+    problem: "",
+    users: ["Individuals"],
+    scope: [
+      "Daily planning and scheduling",
+      "Personal finance and expense tracking",
+      "Habits and personal development",
+      "Reminders and task management",
+      "AI assistance",
+      "Learning and productivity tools",
+      "Mobile-friendly experience",
+    ],
+    statusNote: "Available at the official product URL.",
+    interestSubject: "Personal Life OS",
+    url: "https://ntinginyaos2.vercel.app/login",
   },
   {
     slug: "agriculture-platform",
