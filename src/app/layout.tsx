@@ -5,6 +5,7 @@ import { contactInfo, siteConfig } from "@/config/site";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { HideOnAdmin } from "@/components/layout/HideOnAdmin";
+import { PublicAds } from "@/components/ads/AdsterraAds";
 import "./globals.css";
 
 // Public pages refresh from the CMS at most every 5 minutes (admin pages are always dynamic).
@@ -100,6 +101,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
         </HideOnAdmin>
         <main id="main">{children}</main>
+        <PublicAds />
         <HideOnAdmin>
           <Footer />
         </HideOnAdmin>

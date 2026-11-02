@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PostCard } from "@/components/news/PostCard";
 import { CmsImage } from "@/components/media/CmsImage";
+import { AdsterraSidebar } from "@/components/ads/AdsterraAds";
 import { CTASection } from "@/components/sections/CTASection";
 import { Container } from "@/components/ui/Container";
 import { siteConfig } from "@/config/site";
@@ -120,7 +121,10 @@ export default async function ArticlePage({ params }: Props) {
               </figure>
             ) : null}
             {/* Content is sanitised (sanitize-html allow-list) both when saved and here, before rendering. */}
-            <div className="article-prose mx-auto max-w-3xl" dangerouslySetInnerHTML={{ __html: html }} />
+            <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_160px] lg:items-start">
+              <div className="article-prose max-w-3xl" dangerouslySetInnerHTML={{ __html: html }} />
+              <AdsterraSidebar />
+            </div>
             {post.tags.length ? (
               <ul aria-label="Tags" className="mx-auto mt-10 flex max-w-3xl flex-wrap gap-2 border-t border-deep/10 pt-6">
                 {post.tags.map((tag) => (
