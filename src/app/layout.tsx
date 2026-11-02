@@ -36,12 +36,12 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   keywords: [
     "Ntinginya Tech",
-    "Tanzania technology company",
-    "software development Tanzania",
-    "agriculture technology",
-    "livestock technology",
-    "AgriTech innovation",
-    "business software",
+    "technology insights Tanzania",
+    "AI and digital innovation Africa",
+    "business and entrepreneurship Tanzania",
+    "financial education",
+    "digital skills and remote work",
+    "online safety and cybersecurity",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -73,7 +73,7 @@ const organizationJsonLd = {
   description: siteConfig.description,
   slogan: siteConfig.tagline,
   email: contactInfo.email,
-  areaServed: "TZ",
+  areaServed: ["Tanzania", "East Africa", "Africa", "Worldwide"],
 };
 
 const websiteJsonLd = {

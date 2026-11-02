@@ -15,7 +15,7 @@ import { formatDate } from "@/lib/format";
 // Search results are never indexed; the pages they link to are.
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search Ntinginya Tech articles, products, solutions, Masterclass and R&D.",
+  description: "Search Ntinginya Tech articles, practical guides and digital insights.",
   alternates: { canonical: "/search" },
   robots: { index: false, follow: true },
 };
@@ -66,7 +66,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
 
   return (
     <>
-      <PageHero crumb="Search" title="Search Ntinginya Tech." description="Find articles, products, solutions, Masterclass and R&D." />
+      <PageHero crumb="Search" title="Search Ntinginya Tech." description="Find articles, technology explainers, business insights and practical guides." />
       <section className="bg-paper py-12 sm:py-16">
         <Container>
           <form action="/search" method="get" role="search" className="flex max-w-xl gap-2">
@@ -96,7 +96,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
                 <p>
                   Try a different word, or browse{" "}
                   <Link href="/news" className="font-semibold underline underline-offset-4">
-                    News &amp; Insights
+                    articles
                   </Link>
                   .
                 </p>

@@ -10,14 +10,14 @@ export default function NotFound() {
           This page could not be found.
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-deep/80">
-          The link may be broken or the page may have moved. Head back home or browse our products.
+          The link may be broken or the page may have moved. Head back home or explore our latest articles.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <ButtonLink href="/" variant="dark" size="lg">
             Go to the homepage
           </ButtonLink>
-          <ButtonLink href="/products" variant="outline" size="lg">
-            See our products
+          <ButtonLink href="/news" variant="outline" size="lg">
+            Browse articles
           </ButtonLink>
         </div>
       </Container>

@@ -1,11 +1,12 @@
-const defaultSiteUrl = "https://ntinginya-tech-v4.vercel.app"; 
+const defaultSiteUrl = "https://ntinginya-tech-v4.vercel.app";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || defaultSiteUrl;
 export const siteConfig = {
   name: "Ntinginya Tech",
-  tagline: "Building Technology. Empowering People. Transforming Agriculture.",
-  title: "Ntinginya Tech | Technology & Innovation Solutions",
+  tagline: "Practical technology, business and finance insights from Tanzania.",
+  title: "Ntinginya Tech | Technology, Business & Finance Insights",
   description:
-    "Ntinginya Tech builds software, digital platforms and technology solutions while advancing innovation across business, agriculture and livestock.",
-  url: defaultSiteUrl.replace(/\/$/, ""),
+    "Clear, practical reporting and guides on technology, AI, business, personal finance and digital work, rooted in Tanzania and relevant across Africa and beyond.",
+  url: configuredSiteUrl.replace(/\/$/, ""),
   copyright: "© 2026 Ntinginya Tech. All rights reserved.",
 } as const;
 
@@ -15,29 +16,64 @@ export const contactInfo = {
   location: "Tanzania",
 } as const;
 
+export const publicationTopics = [
+  {
+    label: "Technology",
+    slug: "technology",
+    description: "Technology news, software, cybersecurity and digital change.",
+    href: "/news?category=technology",
+  },
+  {
+    label: "AI & Innovation",
+    slug: "ai-innovation",
+    description: "Useful AI tools, emerging ideas and responsible innovation.",
+    href: "/innovation",
+  },
+  {
+    label: "Business",
+    slug: "business",
+    description: "Entrepreneurship, small business and African startups.",
+    href: "/news?category=business",
+  },
+  {
+    label: "Finance",
+    slug: "finance",
+    description: "Financial education, saving and digital financial services.",
+    href: "/news?category=finance",
+  },
+  {
+    label: "Digital Opportunities",
+    slug: "digital-opportunities",
+    description: "Freelancing, remote work and responsible digital careers.",
+    href: "/news?category=digital-opportunities",
+  },
+  {
+    label: "Tutorials & Guides",
+    slug: "tutorials-guides",
+    description: "Step-by-step help for practical digital skills and tools.",
+    href: "/news?category=tutorials-guides",
+  },
+  {
+    label: "Reviews",
+    slug: "reviews",
+    description: "Considered reviews of useful digital products and services.",
+    href: "/news?category=reviews",
+  },
+] as const;
+
 export const navItems = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Products", href: "/products" },
-  { label: "Agriculture", href: "/agriculture" },
-  { label: "Innovation", href: "/innovation" },
-  { label: "Masterclass", href: "/masterclass" },
-  { label: "R&D", href: "/r-and-d" },
-  { label: "News", href: "/news" },
-  { label: "Network", href: "/network" },
+  ...publicationTopics.map(({ label, href }) => ({ label, href })),
+  { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 export const footerLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Products", href: "/products" },
-  { label: "News", href: "/news" },
-  { label: "Network", href: "/network" },
+  { label: "All articles", href: "/news" },
+  ...publicationTopics.map(({ label, href }) => ({ label, href })),
+  { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "Privacy", href: "/privacy" },
-  { label: "Terms", href: "/terms" },
 ] as const;
 
 // Keep these blank until official profiles are configured; empty hrefs render as inactive labels.

@@ -9,9 +9,9 @@ import { buildMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/cn";
 
 export const metadata = buildMetadata({
-  title: "News & Insights",
+  title: "Technology, Business & Finance Insights",
   description:
-    "Articles and updates from Ntinginya Tech on technology, software, AI, agriculture and livestock innovation, research and education.",
+    "Practical articles, explainers and guides on technology, AI, business, finance and digital opportunities for readers in Tanzania, Africa and beyond.",
   path: "/news",
 });
 
@@ -50,9 +50,9 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
   return (
     <>
       <PageHero
-        crumb="News & Insights"
-        title="News and insights."
-        description="Practical writing on technology, software, AI, agriculture and livestock innovation, research and education."
+        crumb="Articles"
+        title="Ideas for a changing digital world."
+        description="Explore practical reporting and guides on technology, AI, entrepreneurship, personal finance and digital work."
       />
 
       <section className="bg-paper py-12 sm:py-16">
@@ -117,10 +117,12 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
             {result.posts.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-deep/30 p-10 text-center">
                 <h2 className="font-sans text-2xl font-semibold">
-                  {filtered ? "No articles match your search." : "No articles have been published yet."}
+                  {filtered ? "No articles match this search or topic." : "No articles have been published yet."}
                 </h2>
                 <p className="mt-2 text-deep/75">
-                  {filtered ? "Try a different word or category." : "Check back soon for the first Ntinginya Tech article."}
+                  {filtered
+                    ? "Try another search or browse all published articles."
+                    : "Published articles will appear here as they are released. Explore our coverage areas in the meantime."}
                 </p>
                 {filtered ? (
                   <Link href="/news" className="mt-4 inline-block font-sans font-semibold underline underline-offset-4">

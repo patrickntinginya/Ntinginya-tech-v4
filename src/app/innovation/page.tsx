@@ -1,50 +1,69 @@
-import { InnovationFeed } from "@/components/innovation/InnovationFeed";
 import { CTASection } from "@/components/sections/CTASection";
-import { InnovationSection } from "@/components/sections/InnovationSection";
 import { PageHero } from "@/components/sections/PageHero";
-import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { StatusBadge } from "@/components/ui/StatusBadge";
+import { PostCard } from "@/components/news/PostCard";
+import { Container } from "@/components/ui/Container";
+import Link from "next/link";
+import { publicationTopics } from "@/config/site";
+import { getPublicCategories, listPublishedPosts } from "@/lib/cms/public";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
-  title: "Global AgriTech Innovation Hub",
-  description:
-    "The Global AgriTech Innovation Hub is a future Ntinginya Tech platform to discover, analyze, test, adapt and deploy agricultural innovation for Tanzania.",
+  title: "AI & Innovation",
+  description: "Practical articles on artificial intelligence, digital innovation and technology shaping work and business.",
   path: "/innovation",
 });
 
-// Articles come from the CMS; refresh at most once a minute.
 export const revalidate = 60;
 
-type SP = { topic?: string | string[]; page?: string | string[] };
+type SP = { page?: string | string[] };
 const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";
 
 export default async function InnovationPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
-  const topic = first(sp.topic).slice(0, 60);
   const page = Math.max(1, parseInt(first(sp.page), 10) || 1);
+  const categories = await getPublicCategories();
+  const category = categories.find((item) => item.slug === "ai-innovation");
+  const result = category
+    ? await listPublishedPosts({ categoryId: category.id, page })
+    : { posts: [], total: 0, page, pageCount: 1 };
+  const topic = publicationTopics.find((item) => item.slug === "ai-innovation")!;
 
   return (
     <>
       <PageHero
-        crumb="Innovation"
-        title="Global AgriTech Innovation Hub"
-        description="A future platform for studying how the world farms, and for testing what could work in Tanzania."
-      >
-        <StatusBadge status="future" />
-      </PageHero>
-      <Section tone="paper" id="articles" spacing="tight">
-        <SectionHeading
-          title="Innovation articles"
-          description="Agricultural and livestock technology from Tanzania and around the world, published as we research it."
-        />
-        <div className="mt-10">
-          <InnovationFeed topicSlug={topic || undefined} page={page} />
-        </div>
-      </Section>
-      <InnovationSection full ctaHref="#countries" />
-      <CTASection title="Interested in agricultural innovation?" text="Researchers, innovators and agribusinesses are welcome to get in touch." />
+        crumb="AI & Innovation"
+        title="AI & Innovation"
+        description={topic.description}
+      />
+      <section className="bg-paper py-12 sm:py-16">
+        <Container>
+          {result.posts.length ? (
+            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {result.posts.map((post) => (
+                <li key={post.id} className="flex"><div className="w-full"><PostCard post={post} as="h2" /></div></li>
+              ))}
+            </ul>
+          ) : (
+            <div className="rounded-2xl border border-deep/15 bg-white p-8 text-center sm:p-12">
+              <h2 className="font-sans text-2xl font-semibold">No AI &amp; Innovation articles are published yet.</h2>
+              <p className="mt-2 text-deep/75">Browse all published insights across technology, business and finance.</p>
+              <Link href="/news" className="mt-5 inline-block font-sans font-semibold underline underline-offset-4">Explore all articles</Link>
+            </div>
+          )}
+          {result.pageCount > 1 ? (
+            <nav aria-label="Pagination" className="mt-10 flex items-center justify-between font-sans">
+              {result.page > 1 ? <Link href={`/innovation?page=${result.page - 1}`} className="min-h-11 rounded-lg border border-deep/30 px-4 py-2.5 font-semibold hover:bg-deep/5">Newer articles</Link> : <span />}
+              <span className="text-sm text-deep/70">Page {result.page} of {result.pageCount}</span>
+              {result.page < result.pageCount ? <Link href={`/innovation?page=${result.page + 1}`} className="min-h-11 rounded-lg border border-deep/30 px-4 py-2.5 font-semibold hover:bg-deep/5">Older articles</Link> : <span />}
+            </nav>
+          ) : null}
+        </Container>
+      </section>
+      <CTASection
+        title="Technology should be useful and understandable."
+        text="Explore our practical coverage of AI tools and digital innovation, or send us a question or story idea."
+        ctaLabel="Contact the editorial team"
+      />
     </>
   );
 }

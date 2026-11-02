@@ -2,10 +2,10 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 
 export function CTASection({
-  title = "Have a problem worth solving?",
-  text = "Talk to us about software, agriculture technology, research or partnerships.",
+  title = "Have a question or idea to share?",
+  text = "Contact Ntinginya Tech with feedback, story ideas or a responsible partnership enquiry.",
   ctaHref = "/contact",
-  ctaLabel = "Talk to Ntinginya Tech",
+  ctaLabel = "Contact Ntinginya Tech",
 }: {
   title?: string;
   text?: string;
