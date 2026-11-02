@@ -6,12 +6,10 @@ import { useEffect, useState } from "react";
 import { Menu, Search, X } from "lucide-react";
 import { navItems } from "@/config/site";
 import { cn } from "@/lib/cn";
-import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "./Logo";
 
-// The logo already links home, so the desktop bar leaves "Home" out and keeps every other link on one line.
-const desktopNavItems = navItems.filter((item) => item.href !== "/");
+const desktopNavItems = navItems;
 
 function isActive(pathname: string, href: string): boolean {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -57,7 +55,7 @@ export function Header() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "rounded-md px-2.5 py-2 font-sans text-[0.9375rem] font-medium transition-colors",
+                        "whitespace-nowrap rounded-md px-1.5 py-2 font-sans text-[0.8125rem] font-medium transition-colors 2xl:px-2",
                         active ? "bg-deep text-white" : "text-deep/80 hover:bg-deep/5 hover:text-deep",
                       )}
                     >
@@ -77,9 +75,6 @@ export function Header() {
             >
               <Search aria-hidden="true" className="h-5 w-5" />
             </Link>
-            <ButtonLink href="/contact" variant="dark" className="hidden sm:inline-flex">
-              Work With Us
-            </ButtonLink>
             <button
               type="button"
               className="grid h-11 w-11 place-items-center rounded-lg border border-deep/25 text-deep transition-colors hover:bg-deep/5 xl:hidden"
@@ -123,9 +118,6 @@ export function Header() {
                 })}
               </ul>
             </nav>
-            <ButtonLink href="/contact" variant="dark" size="lg" className="mt-8 w-full">
-              Work With Us
-            </ButtonLink>
           </Container>
         </div>
       ) : null}

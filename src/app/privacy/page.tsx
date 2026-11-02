@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
   title: "Privacy Policy",
-  description: "How Ntinginya Tech handles personal information submitted through this website.",
+  description: "How Ntinginya Tech handles contact messages, website advertising and other personal information.",
   path: "/privacy",
 });
 
@@ -28,20 +28,29 @@ export default function PrivacyPage() {
                 your network address with your message. We do not store the address itself.
               </p>
               <p>
-                <strong>Visitors.</strong> Browsing this website does not require an account. We do not run advertising or
-                analytics trackers on this website.
+                <strong>Visitors.</strong> Browsing this website does not require an account. Our pages include third-party
+                advertising delivered by Adsterra. We do not currently operate a first-party analytics dashboard.
               </p>
             </>
           ),
         },
         {
-          heading: "Accounts and cookies",
+          heading: "Accounts, advertising and cookies",
           body: (
-            <p>
-              Only Ntinginya Tech administrators can sign in. When an administrator signs in, our authentication provider
-              sets session cookies that keep them signed in and expire after a period of time. These cookies are needed
-              for the sign-in to work. Public visitors are not given sign-in cookies.
-            </p>
+            <>
+              <p>
+                Only Ntinginya Tech administrators can sign in. When an administrator signs in, our authentication
+                provider sets session cookies needed to keep them signed in. Public visitors are not given sign-in
+                cookies.
+              </p>
+              <p>
+                Adsterra and its advertising partners may use cookies, device identifiers or similar technologies and
+                process technical information (which may include IP address, browser or device details, and ad
+                interactions) to deliver or measure advertising, subject to their own practices and applicable law.
+                Ntinginya Tech does not control how third parties process information through their services. Ads are
+                not loaded on administrator, login or account-related routes.
+              </p>
+            </>
           ),
         },
         {
@@ -62,6 +71,7 @@ export default function PrivacyPage() {
                 <li>Supabase: database, authentication and image storage, where contact messages and site content are stored.</li>
                 <li>Resend: sends us an email notification when a contact message arrives. The notification contains the details you submitted.</li>
                 <li>Netlify: hosts the website and may keep standard server logs.</li>
+                <li>Adsterra: delivers advertising on public pages and may process information as described in its own privacy materials.</li>
               </ul>
             </>
           ),
@@ -92,7 +102,13 @@ export default function PrivacyPage() {
         },
         {
           heading: "Contact",
-          body: <p>Questions about this policy can be sent to {contactInfo.email}.</p>,
+          body: (
+            <p>
+              Questions about this policy or a request concerning your information can be sent to {contactInfo.email}.
+              For information about data handled directly by an advertising provider, please also consult that provider&apos;s
+              privacy materials.
+            </p>
+          ),
         },
       ]}
     />

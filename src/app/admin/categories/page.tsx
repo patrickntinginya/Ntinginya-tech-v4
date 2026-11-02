@@ -2,6 +2,7 @@ import { deleteCategoryAction, updateCategoryAction } from "@/app/admin/actions"
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
 import { CategoryCreateForm } from "@/components/admin/SimpleForms";
 import { Card, Empty, Notice, PageHeader, btnDanger, btnDark, inputClass, labelClass } from "@/components/admin/ui";
+import { publicationTopics } from "@/config/site";
 import { requireStaff } from "@/lib/auth";
 import { listAdminCategories } from "@/lib/cms/admin";
 
@@ -15,8 +16,20 @@ export default async function CategoriesPage({ searchParams }: { searchParams: P
 
   return (
     <>
-      <PageHeader title="Categories" description="Organise articles. A category that posts still use can only be deleted after moving those posts." />
+      <PageHeader title="Categories" description="Organise published articles. Keep these topic slugs unchanged so the public navigation and homepage can find the right articles." />
       <Notice code={notice} />
+      <Card className="mb-6">
+        <h2 className="font-sans text-lg font-semibold">Publication topics</h2>
+        <p className="mt-1 text-sm text-deep/75">Create or update categories to match these names and slugs. Existing posts remain in the CMS when categories change.</p>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {publicationTopics.map((topic) => (
+            <li key={topic.slug} className="rounded-lg bg-mist px-3 py-2 text-sm">
+              <span className="block font-sans font-semibold">{topic.label}</span>
+              <code className="text-xs text-deep/70">{topic.slug}</code>
+            </li>
+          ))}
+        </ul>
+      </Card>
       <div className="grid gap-6 xl:grid-cols-[22rem_minmax(0,1fr)]">
         <Card className="h-fit">
           <h2 className="mb-4 font-sans text-xl font-semibold">New category</h2>

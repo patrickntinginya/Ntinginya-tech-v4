@@ -19,8 +19,8 @@ export async function LatestNews() {
   return (
     <Section tone="mist" id="latest-news" spacing="tight">
       <SectionHeading
-        title="Latest news and insights"
-        description="Practical writing on technology, software, AI, agriculture and livestock innovation."
+        title="Latest articles"
+        description="Practical reporting and guides on technology, business, finance and digital work."
       />
       <ul className="mt-10 grid gap-5 md:grid-cols-3">
         {posts.map((post, i) => (

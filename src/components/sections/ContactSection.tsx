@@ -13,10 +13,10 @@ export async function ContactSection({ defaultSubject = "" }: { defaultSubject?:
     <Section tone="paper" id="contact">
       <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
-          <h2 className="font-sans text-3xl font-semibold leading-tight tracking-[-0.02em] text-balance sm:text-4xl">Tell us about the problem</h2>
+          <h2 className="font-sans text-3xl font-semibold leading-tight tracking-[-0.02em] text-balance sm:text-4xl">Send us a message</h2>
           <p className="mt-4 text-lg leading-relaxed text-deep/80">
-            Whether you need software, want to explore agriculture technology, are interested in the Masterclass or
-            want to collaborate on research, start with a message.
+            Share a question, suggest an article, request a correction or enquire about responsible advertising and
+            sponsorship. We welcome thoughtful feedback from readers and organisations.
           </p>
 
           <dl className="mt-10 space-y-6">
@@ -51,10 +51,12 @@ export async function ContactSection({ defaultSubject = "" }: { defaultSubject?:
             </div>
           </dl>
 
-          <div className="mt-10">
-            <h3 className="font-sans text-sm font-semibold">Social media</h3>
-            <SocialLinks className="mt-3" />
-          </div>
+          {settings.socialLinks.some((item) => item.href) ? (
+            <div className="mt-10">
+              <h3 className="font-sans text-sm font-semibold">Social media</h3>
+              <SocialLinks className="mt-3" />
+            </div>
+          ) : null}
         </div>
 
         <div className="rounded-2xl border border-deep/20 bg-mist p-6 sm:p-8 lg:col-span-7">

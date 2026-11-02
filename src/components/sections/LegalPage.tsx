@@ -8,7 +8,7 @@ export function LegalPage({
   title,
   crumb,
   intro,
-  updated = "30 September 2026",
+  updated = "2 November 2026",
   sections,
 }: {
   title: string;

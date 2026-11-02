@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
   title: "Terms",
-  description: "Terms of use for the Ntinginya Tech website.",
+  description: "Terms for using Ntinginya Tech articles, guides and website services.",
   path: "/terms",
 });
 
@@ -28,10 +28,19 @@ export default function TermsPage() {
           heading: "Information on this website",
           body: (
             <p>
-              Content is provided for general information. Some products and initiatives are labelled MVP, in
-              development, proposed or future: these are plans or early-stage work, not services available today, and they
-              may change. Articles in News &amp; Insights express the views of their authors and are not professional
-              advice.
+              Articles and guides are provided for general information. They do not replace individual professional
+              advice. We aim to keep information useful and accurate, but content may be incomplete, change over time or
+              contain errors. Please verify important information before acting on it.
+            </p>
+          ),
+        },
+        {
+          heading: "Financial and digital-opportunity content",
+          body: (
+            <p>
+              Articles about money, financial services, business and online work are educational. They are not a promise
+              of earnings, investment returns, employment or business results, and they are not personal financial,
+              legal, tax or investment advice. Results and risks vary by person, location, provider and circumstances.
             </p>
           ),
         },
@@ -49,8 +58,9 @@ export default function TermsPage() {
           body: (
             <p>
               This website relies on third-party services (for example Supabase, Resend and Netlify) and may link to
-              other websites. We do not control those services or sites and are not responsible for their content or
-              practices.
+              other websites, including advertising and affiliate partners. Some links or content may be sponsored or
+              earn a commission; where applicable, we aim to identify that relationship. We do not control third-party
+              services or sites and are not responsible for their content or practices.
             </p>
           ),
         },

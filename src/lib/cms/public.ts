@@ -82,27 +82,30 @@ export async function getPublicCategories(): Promise<PublicCategory[]> {
 export async function listPublishedPosts(opts: {
   q?: string;
   categorySlug?: string;
+  categoryId?: string;
   page?: number;
+  pageSize?: number;
 }): Promise<{ posts: PublicPost[]; total: number; page: number; pageCount: number }> {
   const client = createSupabasePublicClient();
   const page = Math.max(1, Math.floor(opts.page ?? 1));
+  const pageSize = Math.max(1, Math.min(Math.floor(opts.pageSize ?? PAGE_SIZE), 24));
   if (!client) return { posts: [], total: 0, page, pageCount: 1 };
 
-  let categoryId: string | null = null;
-  if (opts.categorySlug) {
+  let categoryId = opts.categoryId ?? null;
+  if (!categoryId && opts.categorySlug) {
     const { data } = await client.from("categories").select("id").eq("slug", opts.categorySlug).maybeSingle();
     if (!data) return { posts: [], total: 0, page, pageCount: 1 };
     categoryId = (data as { id: string }).id;
   }
 
-  const from = (page - 1) * PAGE_SIZE;
+  const from = (page - 1) * pageSize;
   let query = client
     .from("posts")
     .select(LIST_COLUMNS, { count: "exact" })
     .eq("status", "PUBLISHED") // RLS already enforces this; kept explicit on purpose.
     .lte("published_at", new Date().toISOString())
     .order("published_at", { ascending: false })
-    .range(from, from + PAGE_SIZE - 1);
+    .range(from, from + pageSize - 1);
 
   if (categoryId) query = query.eq("category_id", categoryId);
   const term = opts.q ? cleanSearchTerm(opts.q) : "";
@@ -115,7 +118,7 @@ export async function listPublishedPosts(opts: {
     posts: await withAuthors((data as unknown as Row[]) ?? []),
     total,
     page,
-    pageCount: Math.max(1, Math.ceil(total / PAGE_SIZE)),
+    pageCount: Math.max(1, Math.ceil(total / pageSize)),
   };
 }
 

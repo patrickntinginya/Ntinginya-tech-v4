@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
+import Link from "next/link";
 import { savePostAction } from "@/app/admin/actions";
 import type { AdminCategory, AdminMedia, AdminPost } from "@/lib/cms/admin";
 import type { FormState } from "@/lib/cms/action-types";
@@ -57,6 +58,18 @@ export function PostForm({
       <div className="flex items-center gap-2 font-sans text-sm text-deep/75">
         Status: <StatusPill status={status} />
       </div>
+
+      <aside className="rounded-xl border border-field-700/25 bg-field-100/50 p-4" aria-label="Editorial checklist">
+        <h2 className="font-sans text-base font-semibold">Before publishing</h2>
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-deep/80">
+          <li>Check names, dates, figures and claims against reliable sources; link sources where useful.</li>
+          <li>Review and substantially edit any AI-assisted draft before it is published.</li>
+          <li>Make financial and online-income guidance balanced, realistic and free of guaranteed results.</li>
+        </ul>
+        <Link href="/editorial-standards" target="_blank" className="mt-3 inline-block font-sans text-sm font-semibold underline underline-offset-4">
+          Read the editorial standards
+        </Link>
+      </aside>
 
       <div>
         <label htmlFor="post-title" className={labelClass}>

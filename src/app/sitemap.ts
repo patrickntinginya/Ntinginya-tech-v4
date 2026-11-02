@@ -20,6 +20,8 @@ const staticRoutes = [
   "/contact",
   "/privacy",
   "/terms",
+  "/disclaimer",
+  "/editorial-standards",
 ];
 
 /**

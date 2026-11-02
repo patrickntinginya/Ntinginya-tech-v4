@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = post.seo_title || post.title;
   const description =
-    post.seo_description || post.excerpt || htmlToText(post.content).slice(0, 160) || siteConfig.description;
+    (post.seo_description || post.excerpt || htmlToText(post.content) || siteConfig.description).slice(0, 160);
   const image = post.social_image || post.featured_image || undefined;
   const path = `/news/${post.slug}`;
 
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: post.updated_at,
       authors: post.author_name ? [post.author_name] : undefined,
       tags: post.tags.length ? post.tags : undefined,
-      images: image ? [{ url: image }] : undefined,
+      images: image ? [{ url: image, alt: post.title }] : undefined,
     },
     twitter: { card: image ? "summary_large_image" : "summary", title, description, images: image ? [image] : undefined },
   };
@@ -81,7 +81,7 @@ export default async function ArticlePage({ params }: Props) {
               <ol className="flex flex-wrap items-center gap-2">
                 <li><Link href="/" className="underline-offset-4 hover:underline">Home</Link></li>
                 <li aria-hidden="true">/</li>
-                <li><Link href="/news" className="underline-offset-4 hover:underline">News &amp; Insights</Link></li>
+                <li><Link href="/news" className="underline-offset-4 hover:underline">Articles</Link></li>
               </ol>
             </nav>
             {post.category ? (

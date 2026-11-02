@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata({
   title: "Contact",
-  description: "Talk to Ntinginya Tech about software, agriculture technology, the Masterclass, research or partnerships.",
+  description: "Contact Ntinginya Tech with questions, corrections, story ideas or responsible advertising and sponsorship enquiries.",
   path: "/contact",
 });
 
@@ -18,8 +18,8 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
     <>
       <PageHero
         crumb="Contact"
-        title="Talk to Ntinginya Tech."
-        description="Tell us what you are working on or what problem you want solved."
+        title="Get in touch."
+        description="Send a question, suggest a story, report a correction or enquire about responsible advertising and sponsorship."
       />
       <ContactSection defaultSubject={defaultSubject} />
     </>
