@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createSupabasePublicClient } from "@/lib/supabase/server";
+import ApkSafetyNotice from "@/components/apps/ApkSafetyNotice";
 
 export const revalidate = 60;
 
@@ -35,6 +36,8 @@ export default async function PublicAppPage({
   return (
     <main className="mx-auto min-h-screen max-w-4xl px-4 py-12 sm:px-6">
       <Link href="/apps" className="text-sm font-semibold">← All apps</Link>
+
+      <ApkSafetyNotice />
 
       <section className="mt-8 rounded-2xl border border-deep/15 bg-paper p-6 sm:p-8">
         {app.icon_url ? <img src={app.icon_url} alt="" className="mb-5 h-20 w-20 rounded-2xl object-cover" /> : null}
