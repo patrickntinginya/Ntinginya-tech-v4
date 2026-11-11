@@ -1,11 +1,12 @@
 const defaultSiteUrl = "https://ntinginya-tech-v4.vercel.app";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || defaultSiteUrl;
+
 export const siteConfig = {
   name: "Ntinginya Tech",
   tagline: "Practical technology, business and finance insights from Tanzania.",
   title: "Ntinginya Tech | Technology, Business & Finance Insights",
   description:
-    "Clear, practical reporting and guides on technology, AI, business, personal finance and digital work, rooted in Tanzania and relevant across Africa and beyond.",
+    "Ntinginya Tech builds software, digital platforms and technology solutions while sharing practical insights on technology, AI, business and digital innovation across Tanzania and Africa.",
   url: configuredSiteUrl.replace(/\/$/, ""),
   copyright: "© 2026 Ntinginya Tech. All rights reserved.",
 } as const;
@@ -65,6 +66,12 @@ export const navItems = [
   { label: "Home", href: "/" },
   ...publicationTopics.map(({ label, href }) => ({ label, href })),
   { label: "About Us", href: "/about" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Products", href: "/products" },
+  { label: "Agriculture", href: "/agriculture" },
+  { label: "Masterclass", href: "/masterclass" },
+  { label: "Research & Development", href: "/r-and-d" },
+  { label: "Network", href: "/network" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -73,10 +80,16 @@ export const footerLinks = [
   { label: "All articles", href: "/news" },
   ...publicationTopics.map(({ label, href }) => ({ label, href })),
   { label: "About Us", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Products", href: "/products" },
+  { label: "Agriculture", href: "/agriculture" },
+  { label: "Masterclass", href: "/masterclass" },
+  { label: "Research & Development", href: "/r-and-d" },
+  { label: "Network", href: "/network" },
+  { label: "Contact Us", href: "/contact" },
 ] as const;
 
-// Keep these blank until official profiles are configured; empty hrefs render as inactive labels.
+// Keep these blank until official profiles are configured.
 export const socialLinks = [
   { label: "LinkedIn", href: "" },
   { label: "X", href: "" },

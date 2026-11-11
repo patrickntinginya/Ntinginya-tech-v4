@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { Activity, ExternalLink, FileText, FolderTree, LayoutGrid, Image as ImageIcon, LayoutDashboard, LogOut, Mail, Menu, Settings, X } from "lucide-react";
+import { Activity, ExternalLink, FileText, FolderTree, LayoutGrid, Image as ImageIcon, LayoutDashboard, LogOut, Mail, Menu, Settings, Smartphone, X } from "lucide-react";
 import { logoutAction } from "@/app/login/actions";
 import { cn } from "@/lib/cn";
 
@@ -13,6 +13,7 @@ const items = [
   { href: "/admin/content", label: "Content", icon: LayoutGrid },
   { href: "/admin/categories", label: "Categories", icon: FolderTree },
   { href: "/admin/media", label: "Media", icon: ImageIcon },
+  { href: "/admin/apps", label: "Apps & APKs", icon: Smartphone },
   { href: "/admin/messages", label: "Messages", icon: Mail },
   { href: "/admin/settings", label: "Settings", icon: Settings },
   { href: "/admin/activity", label: "Activity", icon: Activity },
