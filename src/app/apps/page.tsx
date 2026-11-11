@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getPublishedApps } from "@/lib/apps/public";
+import ApkSafetyNotice from "@/components/apps/ApkSafetyNotice";
 
 export const revalidate = 60;
 
@@ -18,6 +19,8 @@ export default async function AppsPage() {
           Discover and download applications built and published by Ntinginya Tech.
         </p>
       </header>
+
+      <ApkSafetyNotice />
 
       {!apps.length ? (
         <p className="rounded-xl border border-dashed p-8 text-center text-deep/70">
