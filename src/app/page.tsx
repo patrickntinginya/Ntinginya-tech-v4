@@ -9,6 +9,9 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { publicationTopics, siteConfig } from "@/config/site";
 import { getFeaturedPosts, getPublicCategories, listPublishedPosts } from "@/lib/cms/public";
+import { getPublishedApps } from "@/lib/apps/public";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: { absolute: siteConfig.title },
@@ -17,10 +20,11 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [featured, latest, categories] = await Promise.all([
+  const [featured, latest, categories, apps] = await Promise.all([
     getFeaturedPosts(3),
     listPublishedPosts({ page: 1, pageSize: 3 }),
     getPublicCategories(),
+    getPublishedApps(3),
   ]);
   const topicArticles = await Promise.all(
     publicationTopics.map(async (topic) => {
@@ -95,6 +99,58 @@ export default async function HomePage() {
           ))}
         </ul>
       </Section>
+
+      {apps.length ? (
+        <Section tone="mist" id="featured-apps" spacing="tight">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <SectionHeading
+              title="Featured Apps"
+              description="Discover practical applications built and published by Ntinginya Tech."
+            />
+            <Link href="/apps" className="inline-flex min-h-11 items-center gap-2 font-sans font-semibold underline underline-offset-4">
+              Explore all apps <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <ul className="mt-8 grid gap-5 md:grid-cols-3">
+            {apps.map((app) => (
+              <li key={app.id} className="flex">
+                <article className="flex w-full flex-col rounded-2xl border border-deep/15 bg-white p-6">
+                  <div className="flex items-center gap-4">
+                    {app.icon_url ? (
+                      <img src={app.icon_url} alt="" className="h-14 w-14 rounded-xl object-cover" />
+                    ) : (
+                      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-mist font-sans text-xl font-bold">
+                        {app.name.slice(0, 1)}
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="font-sans text-lg font-semibold">{app.name}</h3>
+                      <p className="text-sm text-deep/60">Version {app.latestRelease.version}</p>
+                    </div>
+                  </div>
+
+                  <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-deep/75">
+                    {app.description || "Explore this application from Ntinginya Tech."}
+                  </p>
+
+                  <div className="mt-auto flex flex-wrap items-center gap-3 pt-6">
+                    <a
+                      href={`/api/apps/${app.latestRelease.id}/download`}
+                      className="inline-flex min-h-11 items-center justify-center rounded-lg bg-deep px-4 text-sm font-semibold text-white transition hover:bg-field-800"
+                    >
+                      Download APK
+                    </a>
+                    <Link href={`/apps/${app.slug}`} className="text-sm font-semibold underline underline-offset-4">
+                      Details
+                    </Link>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
 
       {featured.length ? (
         <Section tone="mist" id="editors-picks" spacing="tight">
